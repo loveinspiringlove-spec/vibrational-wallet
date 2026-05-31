@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibrational Wallet</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Vibrational Wallet">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjNkIwRjZCIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMzUlIiBzdG9wLWNvbG9yPSIjNDgwQTUyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNzAlIiBzdG9wLWNvbG9yPSIjNEEwMDQwIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzJBMDgzOCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ29sZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjRUNDODdFIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjRDRBODUzIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0E4NzkzQSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxmaWx0ZXIgaWQ9Imdsb3ciPgogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSI0IiByZXN1bHQ9ImJsdXIiLz4KICAgICAgPGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJibHVyIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPgogICAgPC9maWx0ZXI+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iMzgiIGZpbGw9InVybCgjYmcpIi8+CiAgPHRleHQgeD0iOTAiIHk9IjEyNCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsIHNlcmlmIiBmb250LXNpemU9IjExMCIgZm9udC13ZWlnaHQ9Im5vcm1hbCIKICAgICAgICBmaWxsPSJ1cmwoI2dvbGQpIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWx0ZXI9InVybCgjZ2xvdykiPiQ8L3RleHQ+Cjwvc3ZnPg==">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjNkIwRjZCIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMzUlIiBzdG9wLWNvbG9yPSIjNDgwQTUyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNzAlIiBzdG9wLWNvbG9yPSIjNEEwMDQwIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzJBMDgzOCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ29sZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjRUNDODdFIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjRDRBODUzIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0E4NzkzQSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxmaWx0ZXIgaWQ9Imdsb3ciPgogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSI0IiByZXN1bHQ9ImJsdXIiLz4KICAgICAgPGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJibHVyIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPgogICAgPC9maWx0ZXI+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iMzgiIGZpbGw9InVybCgjYmcpIi8+CiAgPHRleHQgeD0iOTAiIHk9IjEyNCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsIHNlcmlmIiBmb250LXNpemU9IjExMCIgZm9udC13ZWlnaHQ9Im5vcm1hbCIKICAgICAgICBmaWxsPSJ1cmwoI2dvbGQpIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWx0ZXI9InVybCgjZ2xvdykiPiQ8L3RleHQ+Cjwvc3ZnPg==">
+<meta name="theme-color" content="#480A52">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  :root {
+    --gold:          #D4A853;
+    --gold-light:    #ECC87E;
+    --gold-glow:     rgba(212,168,83,0.45);
+    --gold-dim:      #A8793A;
+    --grad-1: #3D0D5E;
+    --grad-2: #480A52;
+    --grad-3: #4A0040;
+    --grad-4: #2A0838;
+    --plum-rose:     #7A1060;
+    --dusty-mauve:   #DDB8D8;
+    --aubergine:     #2E0A30;
+    --on-dark-body:  #F0E8FF;
+    --on-dark-title: var(--gold-light);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--grad-4);
+    min-height: 100%;
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--on-dark-body);
+    overflow-x: hidden;
+  }
+
+  body {
+    background: linear-gradient(145deg,
+      #3D0D5E 0%,
+      #480A52 28%,
+      #4A0040 62%,
+      #2A0838 100%);
+    min-height: 100vh;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 45% at 50% 0%, rgba(90,20,110,0.35) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(74,0,64,0.3) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 95%, rgba(42,8,56,0.5) 0%, transparent 55%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .container {
+    max-width: 600px; margin: 0 auto;
+    padding: 0 18px 60px; position: relative; z-index: 1;
+  }
+
+  /* ── HEADER — matches brand site exactly ── */
+  .header { text-align: center; margin-bottom: 6px; animation: fadeDown 0.9s ease both; padding-top: 14px; }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* top nav bar: ✦  THE ART OF DIVINE ALIGNMENT  ✦ */
+  .brand-nav {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    margin-bottom: 0;
+    padding: 7px 0;
+    border-top: 1px solid rgba(212,168,83,0.28);
+    border-bottom: 1px solid rgba(212,168,83,0.28);
+  }
+  .brand-nav-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(11px, 2.4vw, 13px);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--dusty-mauve);
+  }
+  .brand-nav-star {
+    color: var(--gold-light); font-size: 12px;
+    text-shadow: 0 0 8px var(--gold-glow);
+  }
+
+  /* "THE ART OF" small line above title */
+  .header-pre {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(11px, 2.5vw, 14px);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--dusty-mauve);
+    margin-bottom: 2px;
+  }
+
+  /* Large two-line title: Divine / Alignment */
+  .header-title-wrap {
+    margin-bottom: 14px;
+    line-height: 1.05;
+  }
+  .header-title-plain {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 7.5vw, 48px);
+    font-weight: 400;
+    color: var(--gold-light);
+    text-shadow: 0 0 50px var(--gold-glow);
+    letter-spacing: 1px;
+  }
+  .header-title-italic {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 7.5vw, 48px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--gold-light);
+    text-shadow: 0 0 50px var(--gold-glow);
+    letter-spacing: 1px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(34px, 8.5vw, 54px);
+    font-weight: 400;
+    color: var(--gold-light);
+    text-shadow: 0 0 50px var(--gold-glow), 0 2px 4px rgba(0,0,0,0.3);
+    letter-spacing: 1px;
+    margin-bottom: 0;
+    white-space: nowrap;
+  }
+
+  /* cohesive gold line — close under title */
+  .header-divider {
+    width: 52%; height: 1px;
+    margin: 8px auto 12px;
+    background: linear-gradient(to right, transparent, rgba(212,168,83,0.7) 30%, rgba(212,168,83,0.7) 70%, transparent);
+  }
+
+  /* italic tagline body */
+  .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(16px, 4vw, 20px);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--on-dark-body);
+    line-height: 1.6;
+    margin-bottom: 4px;
+  }
+
+  /* secondary tagline */
+  .header-tagline {
+    font-size: 15px; font-style: italic;
+    color: var(--dusty-mauve); font-weight: 300;
+    margin-top: 8px; opacity: 0.85;
+  }
+
+
+
+  /* ── BILL ANIMATIONS ── */
+  @keyframes borderGlow {
+    0%   { box-shadow: 0 0 0 2px rgba(212,168,83,0.12), 0 16px 30px rgba(0,0,0,0.85), inset 0 0 28px rgba(212,168,83,0.06); border-color: rgba(212,168,83,0.65); }
+    25%  { box-shadow: 0 0 0 3px rgba(212,168,83,0.3), 0 16px 30px rgba(0,0,0,0.85), inset 0 0 36px rgba(212,168,83,0.10); border-color: rgba(236,200,126,0.95); }
+    50%  { box-shadow: 0 0 0 2px rgba(212,168,83,0.12), 0 16px 30px rgba(0,0,0,0.85), inset 0 0 28px rgba(212,168,83,0.06); border-color: rgba(212,168,83,0.65); }
+    75%  { box-shadow: 0 0 0 3px rgba(212,168,83,0.22), 0 16px 30px rgba(0,0,0,0.85), inset 0 0 32px rgba(212,168,83,0.08); border-color: rgba(222,182,110,0.9); }
+    100% { box-shadow: 0 0 0 2px rgba(212,168,83,0.12), 0 16px 30px rgba(0,0,0,0.85), inset 0 0 28px rgba(212,168,83,0.06); border-color: rgba(212,168,83,0.65); }
+  }
+  @keyframes spendGlow {
+    0%   { box-shadow: 0 0 0 2px rgba(212,168,83,0.12), 0 16px 30px rgba(0,0,0,0.85), inset 0 0 28px rgba(212,168,83,0.06); border-color: rgba(212,168,83,0.65); }
+    20%  { box-shadow: 0 0 0 8px rgba(212,168,83,0.55), 0 16px 30px rgba(0,0,0,0.85), inset 0 0 60px rgba(212,168,83,0.18); border-color: rgba(240,210,140,1); }
+    50%  { box-shadow: 0 0 0 4px rgba(212,168,83,0.3), 0 16px 30px rgba(0,0,0,0.85), inset 0 0 40px rgba(212,168,83,0.12); border-color: rgba(230,195,130,0.95); }
+    100% { box-shadow: 0 0 0 2px rgba(212,168,83,0.12), 0 16px 30px rgba(0,0,0,0.85), inset 0 0 28px rgba(212,168,83,0.06); border-color: rgba(212,168,83,0.65); }
+  }
+  .bill.spending { animation: spendGlow 1.8s ease-out forwards !important; }
+
+  /* Vignette — lighter so it doesn't bleed past bill border */
+  .bill-shimmer {
+    position: absolute; inset: 0; border-radius: 10px;
+    background: radial-gradient(ellipse 72% 62% at 50% 50%,
+      transparent 30%, rgba(15,0,22,0.14) 65%, rgba(15,0,22,0.32) 100%);
+    pointer-events: none; z-index: 3;
+  }
+
+  /* Plain gold streak below denomination */
+  .bill-seal {
+    width: 52%; height: 1px; margin: 6px auto 0;
+    background: linear-gradient(to right,
+      transparent 0%,
+      rgba(236,200,126,0.5) 20%,
+      rgba(255,230,140,0.8) 50%,
+      rgba(236,200,126,0.5) 80%,
+      transparent 100%);
+  }
+
+  /* ── BILL ── */
+  .bill-wrapper { perspective: 1000px; margin-bottom: 4px; animation: fadeUp 1s ease 0.2s both; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .bill {
+    width: 100%; max-width: 520px; margin: 0 auto; aspect-ratio: 2.5 / 1;
+    background: linear-gradient(145deg, #4A0A42 0%, #5E1052 25%, #6A1258 50%, #5E1052 75%, #4A0A42 100%);
+    border-radius: 10px; border: 2px solid rgba(212,168,83,0.72);
+    box-shadow: 0 0 0 2px rgba(212,168,83,0.12), 0 16px 30px rgba(0,0,0,0.85), inset 0 0 28px rgba(212,168,83,0.06);
+    position: relative; overflow: hidden; cursor: pointer;
+    transition: transform 0.4s ease; display: block;
+    animation: borderGlow 3s ease-in-out infinite;
+  }
+  .bill:hover {
+    box-shadow: 0 0 0 5px rgba(212,168,83,0.28), 0 20px 40px rgba(0,0,0,0.9), inset 0 0 40px rgba(74,0,64,0.3);
+  }
+  .bill::before {
+    content: ''; position: absolute; inset: 7px;
+    border: 1px solid rgba(212,168,83,0.35); border-radius: 5px;
+    pointer-events: none; z-index: 1;
+  }
+  .bill::after {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg,  transparent, transparent 4px, rgba(255,255,255,0.018) 4px, rgba(255,255,255,0.018) 5px),
+      repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(255,255,255,0.013) 4px, rgba(255,255,255,0.013) 5px);
+    border-radius: 10px; pointer-events: none; z-index: 0;
+  }
+  .bill-content {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 4px; z-index: 2;
+  }
+
+  /* tagline ABOVE */
+  .bill-tagline-above {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(8px, 1.9vw, 13px);
+    letter-spacing: 6px;
+    color: rgba(236,200,126,0.95);
+    text-transform: uppercase;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.55);
+    margin-bottom: 0px;
+  }
+
+  /* denomination — $ centred and scaled to match number height */
+  .bill-denomination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: opacity 0.3s ease;
+  }
+  .bill-dollar {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 8vw, 54px);
+    color: var(--gold-light); font-weight: 600;
+    text-shadow: 0 0 20px rgba(212,168,83,0.35);
+    align-self: center;
+  }
+  .bill-number {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(54px, 15vw, 96px);
+    color: var(--gold-light); font-weight: 600;
+    letter-spacing: -1px;
+    text-shadow: 0 1px 0 rgba(212,168,83,0.45), 0 0 30px rgba(212,168,83,0.38), 0 -1px 0 rgba(0,0,0,0.3);
+  }
+
+  .bill-note {
+    text-align: center; margin-top: 22px; font-size: 13px; letter-spacing: 1px;
+    color: var(--dusty-mauve); font-style: italic; opacity: 1;
+  }
+
+  /* ── DAILY INTENTION ── */
+  .intention-section {
+    text-align: center; margin-bottom: 8px; margin-top: 18px;
+    animation: fadeUp 1s ease 0.28s both;
+    padding: 10px 0 4px;
+    border-top: 1px solid rgba(212,168,83,0.1);
+    border-bottom: 1px solid rgba(212,168,83,0.1);
+  }
+  .intention-label {
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--dusty-mauve); opacity: 0.7; margin-bottom: 10px;
+  }
+  .intention-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-style: italic; font-weight: 300;
+    color: var(--on-dark-body); line-height: 1.6;
+    padding: 0 20px;
+  }
+  .intention-star {
+    color: var(--gold-light); font-size: 10px;
+    display: block; margin-top: 10px;
+    text-shadow: 0 0 8px var(--gold-glow);
+    opacity: 0.7;
+  }
+
+  /* ── COUNTER ── */
+  .counter-section { text-align: center; margin-bottom: 4px; animation: fadeUp 1s ease 0.35s both; }
+  .counter-label {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--dusty-mauve); margin-bottom: 4px; opacity: 1;
+  }
+  /* counter $ inline smaller */
+  .counter {
+    font-family: 'Playfair Display', serif; font-size: 36px;
+    color: var(--gold-light); text-shadow: 0 0 28px var(--gold-glow); line-height: 1;
+    display: flex; align-items: baseline; justify-content: center;
+  }
+  .counter-dollar {
+    font-size: 20px; margin-bottom: 0.1em;
+  }
+  .counter.pulse { animation: countPulse 0.55s ease; }
+  @keyframes countPulse {
+    0%,100% { transform: scale(1); }
+    50%     { transform: scale(1.07); text-shadow: 0 0 50px rgba(212,168,83,0.9); }
+  }
+
+  /* ── PROMPT CARD ── */
+  .prompt-section { margin-bottom: 14px; animation: fadeUp 1s ease 0.45s both; }
+  .prompt-card {
+    background: linear-gradient(135deg, rgba(74,0,64,0.6) 0%, rgba(61,13,94,0.48) 100%);
+    border: 1px solid rgba(212,168,83,0.28); border-radius: 14px; padding: 22px 24px 18px;
+  }
+  .gold-diamond { color: var(--gold-light); }
+  .spend-label {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--dusty-mauve); margin-bottom: 12px;
+  }
+  .spend-row { display: flex; gap: 8px; align-items: stretch; }
+  .spend-input {
+    flex: 1; background: rgba(46,10,48,0.55); border: 1px solid rgba(212,168,83,0.26);
+    border-radius: 10px; padding: 14px 16px; font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; color: var(--on-dark-body); caret-color: var(--gold-light);
+    outline: none; resize: none; height: 90px; transition: border-color 0.25s, box-shadow 0.25s; line-height: 1.5;
+  }
+  .spend-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,168,83,0.13); }
+  .spend-input::placeholder { color: rgba(221,184,216,0.65); font-style: italic; }
+  .spend-btn {
+    background: linear-gradient(160deg, #F0CC7A 0%, #D4A853 40%, #B8843A 100%);
+    border: 1px solid rgba(240,204,122,0.4);
+    border-radius: 10px; padding: 0 22px; height: 90px;
+    font-family: 'Playfair Display', serif; font-size: 15px; color: #2E0A30;
+    cursor: pointer; font-weight: 600; white-space: nowrap; flex-shrink: 0;
+    box-shadow: 0 4px 18px rgba(212,168,83,0.35), inset 0 1px 0 rgba(255,240,180,0.4);
+    transition: transform 0.18s, box-shadow 0.18s, filter 0.18s;
+  }
+  .spend-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(212,168,83,0.55), inset 0 1px 0 rgba(255,240,180,0.4); filter: brightness(1.06); }
+  .spend-btn:active { transform: translateY(1px); box-shadow: 0 2px 10px rgba(212,168,83,0.3); }
+
+  /* ── AMOUNT FIELD ── */
+  .card-footer { display: flex; align-items: center; margin-top: 12px; gap: 10px; }
+  .amount-field-wrap { display: flex; align-items: center; gap: 8px; }
+  .amount-field-label {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--dusty-mauve); white-space: nowrap;
+  }
+  .amount-pill {
+    display: flex; align-items: baseline;
+    background: rgba(46,10,48,0.55);
+    border: 1px solid rgba(212,168,83,0.35);
+    border-radius: 20px; padding: 6px 14px; gap: 2px;
+  }
+  .amount-prefix {
+    font-family: 'Playfair Display', serif; font-size: 13px;
+    color: var(--gold-light); line-height: 1; margin-bottom: 0.1em;
+  }
+  .amount-input {
+    background: transparent; border: none; padding: 0; font-size: 15px;
+    color: var(--gold-light); caret-color: var(--gold-light);
+    font-family: 'Playfair Display', serif; width: 56px; outline: none; text-align: left;
+  }
+
+  /* ── LOG ── */
+  .log-section { animation: fadeUp 1s ease 0.55s both; }
+  .log-header {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+    padding: 4px 0 10px; border-bottom: 1px solid rgba(212,168,83,0.2);
+  }
+  .log-title {
+    font-family: 'Playfair Display', serif; font-size: 19px;
+    color: var(--on-dark-title); font-weight: 400; white-space: nowrap;
+  }
+  .log-line { flex: 1; height: 1px; background: linear-gradient(to right, rgba(212,168,83,0.4), rgba(212,168,83,0.04)); }
+
+  .log-empty { text-align: center; padding: 30px 20px; color: var(--dusty-mauve); font-style: italic; font-size: 15px; }
+  .log-items { display: flex; flex-direction: column; gap: 10px; }
+  .day-group { display: flex; flex-direction: column; gap: 8px; }
+
+  .day-header {
+    display: flex; align-items: center;
+    margin-top: 10px; margin-bottom: 2px; padding: 8px 4px; gap: 0;
+  }
+  .day-date {
+    font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--dusty-mauve); font-family: 'Cormorant Garamond', serif;
+    white-space: nowrap; padding-right: 12px; flex-shrink: 0;
+  }
+  .day-divider {
+    flex: 1; height: 1px;
+    background: linear-gradient(to right, rgba(212,168,83,0.25), transparent);
+  }
+  .day-total {
+    font-family: 'Playfair Display', serif; font-size: 17px;
+    color: var(--gold-light); white-space: nowrap; padding-left: 12px; flex-shrink: 0;
+  }
+
+  .log-item {
+    background: rgba(74,0,64,0.32); border: 1px solid rgba(212,168,83,0.18);
+    border-radius: 11px; padding: 14px 16px; display: flex; align-items: flex-start;
+    gap: 12px; animation: slideIn 0.45s cubic-bezier(0.34,1.56,0.64,1) both;
+    position: relative; overflow: hidden;
+  }
+  .log-item::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: linear-gradient(to bottom, var(--gold-light), var(--plum-rose));
+    border-radius: 3px 0 0 3px;
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-16px) scale(0.96); }
+    to   { opacity: 1; transform: translateX(0) scale(1); }
+  }
+  .log-amount {
+    font-family: 'Playfair Display', serif; font-size: 20px; color: var(--gold-light);
+    font-weight: 600; flex-shrink: 0; line-height: 1.1; text-shadow: 0 0 10px var(--gold-glow);
+  }
+  .log-body { flex: 1; }
+  .log-text { font-size: 15px; color: var(--on-dark-body); line-height: 1.4; font-weight: 300; }
+  .log-delete {
+    background: none; border: none; color: rgba(221,184,216,0.45);
+    cursor: pointer; font-size: 17px; padding: 0 4px; transition: color 0.2s; flex-shrink: 0; line-height: 1;
+  }
+  .log-delete:hover { color: rgba(221,184,216,0.9); }
+  .log-edit {
+    background: none; border: none; color: rgba(212,168,83,0.55); cursor: pointer; font-size: 14px;
+    padding: 0 4px; transition: color 0.2s; flex-shrink: 0; line-height: 1;
+    font-family: 'Cormorant Garamond', serif; letter-spacing: 1px;
+  }
+  .log-edit:hover { color: var(--gold-light); }
+  .log-text-edit {
+    background: rgba(46,10,48,0.6); border: 1px solid rgba(212,168,83,0.42); border-radius: 6px;
+    padding: 4px 8px; font-size: 15px; color: var(--on-dark-body); caret-color: var(--gold-light);
+    font-family: 'Cormorant Garamond', serif; outline: none; width: 100%; line-height: 1.4;
+  }
+
+  .reset-btn {
+    display: block; margin: 20px auto 0; background: none;
+    border: 1px solid rgba(212,168,83,0.28); border-radius: 8px; padding: 7px 16px;
+    color: rgba(212,168,83,0.65); font-family: 'Cormorant Garamond', serif; font-size: 13px;
+    cursor: pointer; letter-spacing: 1px; transition: all 0.2s;
+  }
+  .reset-btn:hover { color: var(--gold-light); border-color: var(--gold); }
+
+  .all-time {
+    text-align: center; margin-top: 28px; padding: 18px 20px;
+    border-top: 1px solid rgba(212,168,83,0.15);
+  }
+  .all-time-label {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--dusty-mauve); margin-bottom: 6px;
+  }
+  .all-time-amount {
+    font-family: 'Playfair Display', serif; font-size: 52px;
+    color: var(--gold-light); text-shadow: 0 0 30px var(--gold-glow); line-height: 1;
+  }
+
+  /* ── ACTION BUTTONS ── */
+  .data-btns { display: flex; justify-content: center; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+  .share-btn, .export-btn {
+    background: none; border: 1px solid rgba(212,168,83,0.3); border-radius: 8px;
+    padding: 9px 20px; color: rgba(236,200,126,0.72); font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; cursor: pointer; letter-spacing: 1px; transition: all 0.2s;
+    display: flex; align-items: center; gap: 7px;
+  }
+  .share-btn:hover, .export-btn:hover { color: var(--gold-light); border-color: var(--gold); }
+
+  .page-attribution {
+    text-align: center; padding: 32px 20px 48px; font-size: 11px; font-style: italic;
+    color: rgba(221,184,216,0.5); line-height: 1.7; letter-spacing: 0.3px;
+  }
+
+  /* ── EXPORT CARD ── */
+  #exportCard {
+    position: fixed; left: -9999px; top: 0; width: 420px;
+    background: linear-gradient(145deg, #3D0D5E 0%, #480A52 28%, #4A0040 62%, #2A0838 100%);
+    padding: 40px 32px 36px; font-family: 'Cormorant Garamond', serif; color: #fff; border-radius: 20px;
+  }
+  #exportCard .ec-title { font-family: 'Playfair Display', serif; font-size: 22px; color: #ECC87E; text-align: center; letter-spacing: 1px; margin-bottom: 4px; }
+  #exportCard .ec-sub { font-size: 13px; color: #DDB8D8; text-align: center; font-style: italic; margin-bottom: 28px; }
+  #exportCard .ec-item { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0; border-bottom: 1px solid rgba(212,168,83,0.12); gap: 12px; }
+  #exportCard .ec-amount { font-family: 'Playfair Display', serif; font-size: 18px; color: #ECC87E; flex-shrink: 0; white-space: nowrap; }
+  #exportCard .ec-text { font-size: 15px; color: #F0E8FF; font-weight: 300; line-height: 1.4; }
+  #exportCard .ec-total { text-align: center; margin-top: 24px; font-family: 'Playfair Display', serif; font-size: 36px; color: #D4A853; text-shadow: 0 0 20px rgba(212,168,83,0.4); }
+  #exportCard .ec-total-label { text-align: center; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #DDB8D8; margin-bottom: 6px; margin-top: 20px; }
+  #exportCard .ec-footer { text-align: center; margin-top: 20px; font-size: 11px; font-style: italic; color: rgba(221,184,216,0.5); }
+
+  /* ── GOLDEN DUST ── */
+  .coin-burst { position: fixed; pointer-events: none; z-index: 999; }
+  .dust {
+    position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, #F2D890 0%, #D4A853 45%, #A8793A 100%);
+    animation: dustFly var(--fly-dur) cubic-bezier(0.25,0.46,0.45,0.94) both;
+    box-shadow: 0 0 var(--glow) rgba(212,168,83,0.88);
+  }
+  @keyframes dustFly {
+    0%   { opacity: 1; transform: translate(0,0) scale(1); }
+    70%  { opacity: 0.6; }
+    100% { opacity: 0; transform: translate(var(--dx),var(--dy)) scale(0.1); }
+  }
+  .sparkle-ring {
+    position: fixed; border-radius: 50%; border: 1.5px solid rgba(212,168,83,0.48);
+    animation: ringExpand 0.9s ease-out both; pointer-events: none; z-index: 998;
+    transform: translate(-50%,-50%);
+  }
+  @keyframes ringExpand {
+    0%   { width: 0; height: 0; opacity: 0.8; }
+    100% { width: 280px; height: 280px; opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Brand nav bar -->
+  <div class="brand-nav">
+    <span class="brand-nav-star">✦</span>
+    <span class="brand-nav-text">The Art of Divine Alignment</span>
+    <span class="brand-nav-star">✦</span>
+  </div>
+
+  <div class="header">
+    <h1>Vibrational Wallet</h1>
+    <div class="header-divider"></div>
+    <p class="header-tagline"><span class="gold-diamond">✦</span> This money always replenishes <span class="gold-diamond">✦</span></p>
+  </div>
+
+  <div class="bill-wrapper">
+    <div class="bill" id="bill">
+      <div class="bill-shimmer"></div>
+      <div class="bill-content">
+        <div class="bill-tagline-above">Divine Abundance</div>
+        <div class="bill-denomination" id="billAmount"><span class="bill-dollar">$</span><span class="bill-number">111</span></div>
+        <div class="bill-seal"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="intention-section">
+    <div class="intention-label">today's intention</div>
+    <div class="intention-text" id="intentionText"></div>
+    <span class="intention-star">✦</span>
+  </div>
+
+  <div class="counter-section">
+    <div class="counter-label">vibrationally spent today</div>
+    <div class="counter" id="counter"><span class="counter-dollar">$</span><span id="counterNum">0</span></div>
+  </div>
+
+  <div class="prompt-section">
+    <div class="prompt-card">
+      <div class="spend-label">✦ How would you spend it?</div>
+      <div class="spend-row">
+        <textarea class="spend-input" id="spendInput" placeholder="What would you love to spend this on?" rows="3"></textarea>
+        <button class="spend-btn" id="spendBtn">Spend it ✦</button>
+      </div>
+      <div class="card-footer">
+        <div class="amount-field-wrap">
+          <span class="amount-field-label">Amount</span>
+          <div class="amount-pill">
+            <span class="amount-prefix">$</span>
+            <input class="amount-input" id="amountInput" type="number" min="1" value="111" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="log-section">
+    <div class="log-header">
+      <div class="log-title">Vibrational Purchases</div>
+      <div class="log-line"></div>
+    </div>
+    <div id="logEmpty" class="log-empty">Your abundant choices will appear here,<br>each one a signal to the Universe.</div>
+    <div class="log-items" id="logItems"></div>
+    <button class="reset-btn" id="resetBtn" style="display:none">Clear &amp; Begin Again</button>
+    <div class="all-time" id="allTimeSection" style="display:none">
+      <div class="all-time-label"><span class="gold-diamond">✦</span> all time vibrationally spent <span class="gold-diamond">✦</span></div>
+      <div class="all-time-amount" id="allTimeAmount">$0</div>
+    </div>
+    <div class="data-btns" id="dataBtns" style="display:none">
+      <button class="share-btn" id="shareBtn"><span class="gold-diamond">✦</span> Share</button>
+      <button class="export-btn" id="exportBtn"><span class="gold-diamond">✦</span> Save as Image</button>
+    </div>
+  </div>
+
+  <div class="page-attribution">
+    Inspired by: The Wallet Process, Ask and It Is Given<br>
+    © Jerry &amp; Esther Hicks &amp; Abraham-Hicks Publications
+  </div>
+
+</div>
+
+<div id="exportCard"></div>
+
+<script>
+let purchases = JSON.parse(localStorage.getItem('abundancePurchases') || '[]');
+let currentDenom = 111;
+
+function getTodayTotal() {
+  const today = new Date().toDateString();
+  return purchases.filter(p=>(p.date||new Date(p.id).toDateString())===today).reduce((s,p)=>s+p.amount,0);
+}
+
+// Daily intention phrases
+const INTENTIONS = [
+  "Money flows to me easily and joyfully.",
+  "I am a vibrational match to abundance.",
+  "The Universe delights in providing for me.",
+  "I receive with grace and appreciation.",
+  "Prosperity is my natural state of being.",
+  "Every dollar I spend returns multiplied.",
+  "I am open to infinite streams of income.",
+  "Abundance is always flowing to me.",
+  "I welcome financial freedom.",
+  "The more I appreciate, the more I receive.",
+  "Money is energy and I welcome its flow.",
+  "I am aligned with the frequency of wealth.",
+  "My desires are valid and always fulfilled.",
+  "I trust the Universe to provide for me.",
+  "Spending is giving energy permission to flow."
+];
+
+function setDailyIntention() {
+  // Seed by day so it changes daily but stays consistent within a day
+  const dayNum = Math.floor(Date.now() / 86400000);
+  const phrase = INTENTIONS[dayNum % INTENTIONS.length];
+  const el = document.getElementById('intentionText');
+  if (el) el.textContent = phrase;
+}
+
+// Denomination cycle on bill tap
+const DENOMS = [111, 222, 333, 444, 555, 666, 777, 888, 999, 1111];
+const DENOM_LABELS = {111:'111', 222:'222', 333:'333', 444:'444', 555:'555', 666:'666', 777:'777', 888:'888', 999:'999', 1111:'1,111'};
+let denomIndex = 0;
+
+document.getElementById('bill').addEventListener('click', () => {
+  denomIndex = (denomIndex + 1) % DENOMS.length;
+  currentDenom = DENOMS[denomIndex];
+  const billAmt = document.getElementById('billAmount');
+  billAmt.style.opacity = '0';
+  setTimeout(() => {
+    billAmt.querySelector('.bill-number').textContent = DENOM_LABELS[currentDenom];
+    billAmt.style.opacity = '1';
+  }, 150);
+  document.getElementById('amountInput').value = currentDenom;
+  // brief border flash
+  const bill = document.getElementById('bill');
+  bill.style.borderColor = 'rgba(236,200,126,0.95)';
+  setTimeout(() => { bill.style.borderColor = ''; }, 400);
+  // haptic
+  if (navigator.vibrate) navigator.vibrate(30);
+});
+
+function updateCounter() {
+  const num = getTodayTotal();
+  document.getElementById('counterNum').textContent = num.toLocaleString();
+  const el = document.getElementById('counter');
+  el.classList.remove('pulse'); void el.offsetWidth; el.classList.add('pulse');
+}
+
+
+function coinBurst(x,y) {
+  [0,180,380].forEach((delay,i)=>{
+    setTimeout(()=>{
+      const ring=document.createElement('div'); ring.className='sparkle-ring';
+      ring.style.cssText=`left:${x}px;top:${y}px;animation-duration:${1.0+i*0.25}s`;
+      document.body.appendChild(ring); setTimeout(()=>ring.remove(),1500);
+    },delay);
+  });
+  const b=document.createElement('div'); b.className='coin-burst';
+  b.style.cssText=`left:${x}px;top:${y}px`; document.body.appendChild(b);
+  for(let i=0;i<90;i++){
+    const c=document.createElement('div'); c.className='dust';
+    const isBig=i<16,isMed=i<36;
+    const size=isBig?(16+Math.random()*18):isMed?(6+Math.random()*8):(2+Math.random()*4);
+    const ang=Math.random()*360,dist=isBig?(150+Math.random()*220):isMed?(80+Math.random()*160):(30+Math.random()*120);
+    const rad=ang*Math.PI/180,dx=Math.cos(rad)*dist,dy=Math.sin(rad)*dist-Math.abs(Math.sin(rad)*dist*0.3);
+    c.style.cssText=[`width:${size.toFixed(1)}px`,`height:${size.toFixed(1)}px`,`--dx:${dx.toFixed(1)}px`,`--dy:${dy.toFixed(1)}px`,`--fly-dur:${(1+Math.random()*1.2).toFixed(2)}s`,`--glow:${isBig?'8px':isMed?'4px':'2px'}`,`animation-delay:${(Math.random()*0.25).toFixed(2)}s`,`opacity:${(0.75+Math.random()*0.25).toFixed(2)}`].join(';');
+    b.appendChild(c);
+  }
+  setTimeout(()=>b.remove(),2800);
+}
+
+function formatDate(s){
+  const d=new Date(s),t=new Date(),y=new Date();y.setDate(t.getDate()-1);
+  if(d.toDateString()===t.toDateString())return'Today';
+  if(d.toDateString()===y.toDateString())return'Yesterday';
+  return d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
+}
+
+function renderLog(){
+  const items=document.getElementById('logItems'),empty=document.getElementById('logEmpty'),rst=document.getElementById('resetBtn');
+  if(!purchases.length){empty.style.display='block';items.innerHTML='';rst.style.display='none';document.getElementById('allTimeSection').style.display='none';document.getElementById('dataBtns').style.display='none';return;}
+  empty.style.display='none';rst.style.display='block';
+  const allT=purchases.reduce((s,p)=>s+p.amount,0);
+  document.getElementById('allTimeSection').style.display='block';
+  document.getElementById('allTimeAmount').textContent=`$${allT.toLocaleString()}`;
+  document.getElementById('dataBtns').style.display='flex';
+  items.innerHTML='';
+  const groups={};
+  [...purchases].reverse().forEach(p=>{const k=p.date||new Date(p.id).toDateString();if(!groups[k])groups[k]=[];groups[k].push(p);});
+  Object.entries(groups).forEach(([dateKey,dayP])=>{
+    const dayT=dayP.reduce((s,p)=>s+p.amount,0);
+    const group=document.createElement('div');group.className='day-group';
+    const hdr=document.createElement('div');hdr.className='day-header';
+    hdr.innerHTML=`<span class="day-date">${formatDate(dateKey)}</span><div class="day-divider"></div><span class="day-total">$${dayT.toLocaleString()} spent</span>`;
+    group.appendChild(hdr);
+    dayP.forEach(p=>{
+      const d=document.createElement('div');d.className='log-item';
+      const safe=p.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      d.innerHTML=`<div class="log-amount">$${p.amount.toLocaleString()}</div><div class="log-body"><div class="log-text" data-id="${p.id}">${safe}</div></div><button class="log-edit" data-id="${p.id}">edit</button><button class="log-delete" data-id="${p.id}">×</button>`;
+      group.appendChild(d);
+    });
+    items.appendChild(group);
+  });
+  items.querySelectorAll('.log-delete').forEach(btn=>{
+    btn.addEventListener('click',()=>{purchases=purchases.filter(p=>p.id!=btn.dataset.id);localStorage.setItem('abundancePurchases',JSON.stringify(purchases));updateCounter();renderLog();setDailyIntention();});
+  });
+  items.querySelectorAll('.log-edit').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const id=btn.dataset.id,textDiv=items.querySelector(`.log-text[data-id="${id}"]`),purchase=purchases.find(p=>p.id==id);
+      if(!purchase||textDiv.querySelector('input'))return;
+      const inp=document.createElement('input');inp.type='text';inp.className='log-text-edit';inp.value=purchase.text;
+      textDiv.innerHTML='';textDiv.appendChild(inp);inp.focus();btn.textContent='save';
+      const save=()=>{const t=inp.value.trim();if(t){purchase.text=t;localStorage.setItem('abundancePurchases',JSON.stringify(purchases));}renderLog();};
+      btn.onclick=save;inp.addEventListener('keydown',e=>{if(e.key==='Enter')save();});
+    });
+  });
+}
+
+document.getElementById('spendBtn').addEventListener('click',()=>{
+  const inp=document.getElementById('spendInput'),amtEl=document.getElementById('amountInput');
+  const text=inp.value.trim(),amount=Math.max(1,parseInt(amtEl.value)||currentDenom);
+  if(!text){inp.focus();inp.style.borderColor='rgba(212,168,83,0.7)';setTimeout(()=>inp.style.borderColor='',900);return;}
+  if (navigator.vibrate) navigator.vibrate([40, 30, 40]);
+  purchases.push({id:Date.now(),amount,text,context:'',date:new Date().toDateString()});
+  localStorage.setItem('abundancePurchases',JSON.stringify(purchases));
+  const bill=document.getElementById('bill'),r=bill.getBoundingClientRect();
+  bill.classList.remove('spending');void bill.offsetWidth;bill.classList.add('spending');
+  setTimeout(()=>{bill.classList.remove('spending');bill.style.animation='borderGlow 3s ease-in-out infinite';},1900);
+  coinBurst(r.left+r.width/2,r.top+r.height/2);
+  const billAmt=document.getElementById('billAmount');
+  billAmt.style.opacity='0';
+  setTimeout(()=>{billAmt.querySelector('.bill-number').textContent=amount.toLocaleString();billAmt.style.opacity='1';},200);
+  inp.value='';amtEl.value=amount;updateCounter();renderLog();setDailyIntention();
+});
+
+document.getElementById('spendInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();document.getElementById('spendBtn').click();}});
+
+document.getElementById('resetBtn').addEventListener('click',()=>{
+  const btn=document.getElementById('resetBtn');
+  if(btn.dataset.confirming==='true'){
+    purchases=[];localStorage.removeItem('abundancePurchases');
+    btn.dataset.confirming='false';btn.textContent='Clear & Begin Again';btn.style.color='';btn.style.borderColor='';
+    document.getElementById('billAmount').querySelector('.bill-number').textContent=currentDenom.toLocaleString();
+    document.getElementById('allTimeSection').style.display='none';document.getElementById('dataBtns').style.display='none';
+    updateCounter();renderLog();setDailyIntention();
+  } else {
+    btn.dataset.confirming='true';btn.textContent='Are you sure? Tap again to clear ✦';
+    btn.style.color='rgba(212,168,83,0.85)';btn.style.borderColor='rgba(212,168,83,0.5)';
+    setTimeout(()=>{if(btn.dataset.confirming==='true'){btn.dataset.confirming='false';btn.textContent='Clear & Begin Again';btn.style.color='';btn.style.borderColor='';}},3500);
+  }
+});
+
+const bill=document.getElementById('bill');
+bill.addEventListener('mousemove',e=>{
+  const r=bill.getBoundingClientRect();
+  bill.style.transform=`rotateX(${((e.clientY-r.top-r.height/2)/r.height)*-7}deg) rotateY(${((e.clientX-r.left-r.width/2)/r.width)*7}deg) scale(1.015)`;
+});
+bill.addEventListener('mouseleave',()=>{bill.style.transform='';});
+
+document.getElementById('shareBtn').addEventListener('click',async()=>{
+  const today=new Date().toDateString(),groups={};
+  [...purchases].forEach(p=>{const k=p.date||new Date(p.id).toDateString();if(!groups[k])groups[k]=[];groups[k].push(p);});
+  let text='✦ Vibrational Wallet · The Art of Divine Alignment ✦\n';
+  text+='Inspired by the Wallet Process, Ask and It Is Given by Abraham-Hicks\n\n';
+  Object.entries(groups).reverse().forEach(([dk,dp])=>{
+    const dt=dp.reduce((s,p)=>s+p.amount,0);
+    const label=dk===today?'Today':new Date(dk).toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
+    text+=`${label} — $${dt} vibrationally spent\n`;
+    dp.forEach(p=>{text+=`  $${p.amount}  ${p.text}\n`;});text+='\n';
+  });
+  text+=`✦ All time vibrationally spent: $${purchases.reduce((s,p)=>s+p.amount,0).toLocaleString()} ✦`;
+  const btn=document.getElementById('shareBtn');
+  try{await navigator.share({title:'Vibrational Wallet',text});}catch{
+    try{await navigator.clipboard.writeText(text);const orig=btn.innerHTML;btn.innerHTML='<span class="gold-diamond">✦</span> Copied!';setTimeout(()=>{btn.innerHTML=orig;},2500);}
+    catch{const ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:85vw;height:60vh;z-index:9999;padding:16px;font-size:14px;border-radius:12px;border:1px solid #D4A853;background:#2A0838;color:#fff;';document.body.appendChild(ta);ta.focus();ta.select();const close=document.createElement('button');close.textContent='✦ Done';close.style.cssText='position:fixed;top:calc(50% + 31vh);left:50%;transform:translateX(-50%);z-index:9999;padding:10px 30px;background:linear-gradient(135deg,#D4A853,#A8793A);border:none;border-radius:20px;font-family:Playfair Display,serif;font-size:15px;color:#2E0A30;font-weight:600;cursor:pointer;';close.onclick=()=>{document.body.removeChild(ta);document.body.removeChild(close);};document.body.appendChild(close);}
+  }
+});
+
+document.getElementById('exportBtn').addEventListener('click',async()=>{
+  const btn=document.getElementById('exportBtn'),orig=btn.innerHTML;
+  btn.innerHTML='<span class="gold-diamond">✦</span> Generating…';btn.style.opacity='0.6';
+  const card=document.getElementById('exportCard'),today=new Date().toDateString();
+  const todayP=purchases.filter(p=>(p.date||new Date(p.id).toDateString())===today);
+  const allTime=purchases.reduce((s,p)=>s+p.amount,0);
+  let html=`<div class="ec-title">✦ Vibrational Wallet ✦</div>`;
+  html+=`<div class="ec-sub">${new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</div>`;
+  if(todayP.length){todayP.forEach(p=>{const safe=p.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');html+=`<div class="ec-item"><span class="ec-text">${safe}</span><span class="ec-amount">$${p.amount.toLocaleString()}</span></div>`;});}
+  else{html+=`<div class="ec-item"><span class="ec-text" style="opacity:0.5;font-style:italic">No purchases yet today</span></div>`;}
+  html+=`<div class="ec-total-label">✦ All time vibrationally spent ✦</div><div class="ec-total">$${allTime.toLocaleString()}</div>`;
+  html+=`<div class="ec-footer">The Art of Divine Alignment<br>Inspired by Abraham-Hicks</div>`;
+  card.innerHTML=html;
+  try{
+    const canvas=await html2canvas(card,{backgroundColor:null,scale:2,useCORS:true,logging:false,width:420,height:card.scrollHeight});
+    const link=document.createElement('a');link.download='vibrational-wallet.png';link.href=canvas.toDataURL('image/png');link.click();
+  }catch(e){alert('Image export not supported in this browser. Use Share instead.');}
+  btn.innerHTML=orig;btn.style.opacity='';
+});
+
+updateCounter();renderLog();setDailyIntention();
+const todayP=purchases.filter(p=>(p.date||new Date(p.id).toDateString())===new Date().toDateString());
+if(todayP.length>0){document.getElementById('billAmount').querySelector('.bill-number').textContent=todayP[todayP.length-1].amount.toLocaleString();}else{document.getElementById('billAmount').querySelector('.bill-number').textContent='111';}
+</script>
+</body>
+</html>

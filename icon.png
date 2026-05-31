@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8">
+<style>
+  body { background: #1a1a2e; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; font-family: Georgia, serif; gap: 24px; }
+  .label { color: rgba(200,160,192,0.7); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
+  .icon-wrap { filter: drop-shadow(0 8px 24px rgba(212,168,83,0.35)); }
+</style>
+</head>
+<body>
+<div class="label">Home Screen Icon</div>
+<div class="icon-wrap">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6B0F6B"/>
+      <stop offset="35%" stop-color="#480A52"/>
+      <stop offset="70%" stop-color="#4A0040"/>
+      <stop offset="100%" stop-color="#2A0838"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ECC87E"/>
+      <stop offset="50%" stop-color="#D4A853"/>
+      <stop offset="100%" stop-color="#A8793A"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="180" height="180" rx="38" fill="url(#bg)"/>
+
+  <text x="90" y="124" font-family="Georgia, serif" font-size="110" font-weight="normal"
+        fill="url(#gold)" text-anchor="middle" filter="url(#glow)">$</text>
+</svg>
+</div>
+<div class="label" style="font-size:11px; opacity:0.5;">180 × 180px · Vibrational Wallet</div>
+</body>
+</html>

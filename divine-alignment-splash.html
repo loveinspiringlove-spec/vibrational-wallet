@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibrational Wallet</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold:       #D4A853;
+    --gold-light: #ECC87E;
+    --gold-glow:  rgba(212,168,83,0.45);
+    --gold-dim:   #A8793A;
+    --mauve:      #DDB8D8;
+    --body:       #F0E8FF;
+    --aubergine:  #2E0A30;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%; width: 100%;
+    overflow: hidden;
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--body);
+  }
+
+  body {
+    background: linear-gradient(145deg, #3D0D5E 0%, #480A52 28%, #4A0040 62%, #2A0838 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative;
+  }
+
+  /* Background radial glow */
+  body::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 50%, rgba(122,16,96,0.3) 0%, transparent 65%),
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(90,20,110,0.3) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  /* ── SPLASH WRAPPER ── */
+  #splash {
+    position: fixed; inset: 0; z-index: 100;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0;
+    transition: opacity 1s ease;
+  }
+  #splash.fade-out { opacity: 0; pointer-events: none; }
+
+  /* Nav bar */
+  .splash-nav {
+    position: absolute; top: 0; left: 0; right: 0;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(212,168,83,0.25);
+    animation: fadeDown 1s ease both;
+  }
+  .splash-nav-star { color: var(--gold-light); font-size: 11px; text-shadow: 0 0 10px var(--gold-glow); }
+  .splash-nav-text {
+    font-size: clamp(10px, 2.2vw, 12px);
+    letter-spacing: 5px; text-transform: uppercase; color: var(--mauve);
+  }
+
+  /* Bill area */
+  .splash-bill-wrap {
+    position: relative;
+    width: min(88vw, 480px);
+    animation: fadeUp 1s ease 0.3s both;
+    cursor: default;
+  }
+
+  .splash-bill {
+    width: 100%;
+    aspect-ratio: 2.35 / 1;
+    background: linear-gradient(145deg, #4A0A42 0%, #5E1052 25%, #6A1258 50%, #5E1052 75%, #4A0A42 100%);
+    border-radius: 14px;
+    border: 2px solid rgba(212,168,83,0.75);
+    box-shadow: 0 0 0 2px rgba(212,168,83,0.12), 0 20px 50px rgba(0,0,0,0.8), inset 0 0 30px rgba(212,168,83,0.06);
+    position: relative; overflow: visible;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 6px;
+    animation: billGlow 3s ease-in-out infinite;
+  }
+
+  /* Bill vignette */
+  .splash-bill::before {
+    content: ''; position: absolute; inset: 0; border-radius: 12px;
+    background: radial-gradient(ellipse 72% 62% at 50% 50%, transparent 30%, rgba(15,0,22,0.18) 65%, rgba(15,0,22,0.38) 100%);
+    pointer-events: none; z-index: 1;
+  }
+  /* Inner border */
+  .splash-bill::after {
+    content: ''; position: absolute; inset: 8px; border-radius: 8px;
+    border: 1px solid rgba(212,168,83,0.32); pointer-events: none; z-index: 1;
+  }
+
+  @keyframes billGlow {
+    0%,100% { border-color: rgba(212,168,83,0.65); box-shadow: 0 0 0 2px rgba(212,168,83,0.1), 0 20px 50px rgba(0,0,0,0.8); }
+    50%      { border-color: rgba(236,200,126,0.95); box-shadow: 0 0 0 4px rgba(212,168,83,0.25), 0 20px 50px rgba(0,0,0,0.8); }
+  }
+
+  /* Explosion glow — fires on .exploding */
+  @keyframes explodeGlow {
+    0%   { border-color: rgba(212,168,83,0.65); box-shadow: 0 0 0 2px rgba(212,168,83,0.1), 0 20px 50px rgba(0,0,0,0.8); }
+    20%  { border-color: rgba(255,240,150,1); box-shadow: 0 0 0 12px rgba(212,168,83,0.6), 0 0 80px rgba(212,168,83,0.5), 0 20px 50px rgba(0,0,0,0.8); }
+    60%  { border-color: rgba(236,200,126,0.9); box-shadow: 0 0 0 6px rgba(212,168,83,0.3), 0 0 40px rgba(212,168,83,0.3), 0 20px 50px rgba(0,0,0,0.8); }
+    100% { border-color: rgba(212,168,83,0.65); box-shadow: 0 0 0 2px rgba(212,168,83,0.1), 0 20px 50px rgba(0,0,0,0.8); }
+  }
+  .splash-bill.exploding { animation: explodeGlow 1s ease-out forwards; }
+
+  .bill-tagline-above {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(8px, 2vw, 13px); letter-spacing: 6px; text-transform: uppercase;
+    color: rgba(236,200,126,0.92); text-shadow: 0 1px 6px rgba(0,0,0,0.55);
+    position: relative; z-index: 2;
+  }
+  .bill-denom {
+    display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 2;
+  }
+  .bill-dollar {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 7vw, 52px); font-weight: 600;
+    color: var(--gold-light); align-self: center;
+    text-shadow: 0 0 20px rgba(212,168,83,0.4);
+  }
+  .bill-number {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(60px, 16vw, 110px); font-weight: 600;
+    color: var(--gold-light); letter-spacing: -2px;
+    text-shadow: 0 0 40px rgba(212,168,83,0.5), 0 2px 0 rgba(212,168,83,0.3);
+    line-height: 1;
+  }
+  .bill-streak {
+    width: 52%; height: 1px; position: relative; z-index: 2;
+    background: linear-gradient(to right, transparent, rgba(236,200,126,0.7) 50%, transparent);
+  }
+
+  /* ── GOLD DUST PARTICLES ── */
+  .dust-container {
+    position: absolute; inset: -40px; pointer-events: none; z-index: 10;
+    opacity: 0;
+  }
+  .dust-container.burst { opacity: 1; }
+
+  .dust-particle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, #FFF8C0 0%, #D4A853 50%, #A8793A 100%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+  }
+  .dust-particle.fly {
+    animation: dustFly var(--dur) cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+  @keyframes dustFly {
+    0%   { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+    70%  { opacity: 0.7; }
+    100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.15); }
+  }
+
+  /* Sparkle rings */
+  .ring {
+    position: absolute; top: 50%; left: 50%;
+    border-radius: 50%; border: 1.5px solid rgba(212,168,83,0.55);
+    transform: translate(-50%,-50%);
+    animation: ringExpand var(--ring-dur) ease-out both;
+    pointer-events: none;
+  }
+  @keyframes ringExpand {
+    0%   { width: 20px; height: 20px; opacity: 0.9; }
+    100% { width: var(--ring-size); height: var(--ring-size); opacity: 0; }
+  }
+
+  /* ── TAGLINE BELOW BILL ── */
+  .splash-tagline {
+    margin-top: 28px;
+    text-align: center;
+    animation: fadeUp 1s ease 0.6s both;
+  }
+  .splash-tagline h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 7vw, 48px); font-weight: 400;
+    color: var(--gold-light); letter-spacing: 1px;
+    text-shadow: 0 0 40px var(--gold-glow);
+    margin-bottom: 10px;
+  }
+  .splash-tagline p {
+    font-size: clamp(15px, 3.5vw, 20px); font-style: italic;
+    color: var(--mauve); font-weight: 300; line-height: 1.6;
+  }
+  .splash-tagline .gold-star { color: var(--gold-light); opacity: 0.7; font-size: 13px; display: block; margin-top: 10px; letter-spacing: 6px; }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+
+</style>
+</head>
+<body>
+
+<div id="splash">
+  <!-- Nav -->
+  <div class="splash-nav">
+    <span class="splash-nav-star">✦</span>
+    <span class="splash-nav-text">The Art of Divine Alignment</span>
+    <span class="splash-nav-star">✦</span>
+  </div>
+
+  <!-- Bill -->
+  <div class="splash-bill-wrap">
+    <div class="splash-bill" id="splashBill">
+      <div class="bill-tagline-above">Divine Abundance</div>
+      <div class="bill-denom">
+        <span class="bill-dollar">$</span>
+        <span class="bill-number">111</span>
+      </div>
+      <div class="bill-streak"></div>
+    </div>
+    <!-- Dust container -->
+    <div class="dust-container" id="dustContainer"></div>
+  </div>
+
+  <!-- Tagline -->
+  <div class="splash-tagline">
+    <h1>Vibrational Wallet</h1>
+    <p>Spend this money again and again.<br>It always replenishes.</p>
+    <span class="gold-star">✦ &nbsp; ✦ &nbsp; ✦</span>
+  </div>
+</div>
+
+
+
+<script>
+function fireExplosion() {
+  const bill = document.getElementById('splashBill');
+  const container = document.getElementById('dustContainer');
+
+  // Bill glow burst
+  bill.classList.add('exploding');
+
+  // Gold dust burst
+  container.classList.add('burst');
+  const count = 80;
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'dust-particle';
+    const isBig = i < 14, isMed = i < 34;
+    const size = isBig ? (14 + Math.random() * 16) : isMed ? (5 + Math.random() * 8) : (2 + Math.random() * 4);
+    const angle = Math.random() * 360;
+    const dist = isBig ? (120 + Math.random() * 160) : isMed ? (70 + Math.random() * 120) : (30 + Math.random() * 90);
+    const rad = angle * Math.PI / 180;
+    const dx = Math.cos(rad) * dist;
+    const dy = Math.sin(rad) * dist - Math.abs(Math.sin(rad) * dist * 0.25);
+    const dur = (0.9 + Math.random() * 1.1).toFixed(2);
+    p.style.cssText = `width:${size.toFixed(1)}px;height:${size.toFixed(1)}px;--dx:${dx.toFixed(1)}px;--dy:${dy.toFixed(1)}px;--dur:${dur}s;box-shadow:0 0 ${isBig?'8px':isMed?'4px':'2px'} rgba(212,168,83,0.85);animation-delay:${(Math.random()*0.2).toFixed(2)}s`;
+    container.appendChild(p);
+    void p.offsetWidth;
+    p.classList.add('fly');
+    setTimeout(() => p.remove(), 2200);
+  }
+}
+
+// Sequence: explosion at 1.5s, fade out at 2.5s
+window.addEventListener('load', () => {
+  setTimeout(fireExplosion, 1500);
+  setTimeout(() => {
+    document.getElementById('splash').classList.add('fade-out');
+    setTimeout(() => {
+      window.location.href = 'divine-alignment-wallet.html';
+    }, 1000);
+  }, 4500);
+});
+</script>
+</body>
+</html>

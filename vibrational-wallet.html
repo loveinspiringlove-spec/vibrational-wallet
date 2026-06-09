@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibrational Wallet</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Vibrational Wallet">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIiB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzVBMTA1MCIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjNDgwQTUyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNzAlIiBzdG9wLWNvbG9yPSIjNEEwMDQwIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMkEwODM4Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJiaWxsZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM0QTBBNDIiLz48c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iIzZBMTI1OCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzRBMEE0MiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ2IiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjRUNDODdFIi8+PHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiNENEE4NTMiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNBODc5M0EiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9Imd0IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGOEUwOTAiLz48c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI0Q0QTg1MyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0E4NzkzQSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxmaWx0ZXIgaWQ9Imdsb3ciIHg9Ii0yMCUiIHk9Ii0yMCUiIHdpZHRoPSIxNDAlIiBoZWlnaHQ9IjE0MCUiPgogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIyIiByZXN1bHQ9ImJsdXIiLz4KICAgICAgPGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJibHVyIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPgogICAgPC9maWx0ZXI+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iMzgiIGZpbGw9InVybCgjYmcpIi8+CiAgPHJlY3QgeD0iMTQiIHk9IjQ2IiB3aWR0aD0iMTUyIiBoZWlnaHQ9Ijg4IiByeD0iMTAiIGZpbGw9InVybCgjYmlsbGcpIi8+CiAgPHJlY3QgeD0iMTQiIHk9IjQ2IiB3aWR0aD0iMTUyIiBoZWlnaHQ9Ijg4IiByeD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCNnYikiIHN0cm9rZS13aWR0aD0iMiIgb3BhY2l0eT0iMC44NSIvPgogIDxyZWN0IHg9IjIxIiB5PSI1MyIgd2lkdGg9IjEzOCIgaGVpZ2h0PSI3NCIgcng9IjciIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCNnYikiIHN0cm9rZS13aWR0aD0iMC44IiBvcGFjaXR5PSIwLjQ1Ii8+CiAgPHRleHQgeD0iOTAiIHk9IjExMiIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsIHNlcmlmIiBmb250LXNpemU9Ijc0IiBmb250LXdlaWdodD0iMTAwIgogICAgICAgIGZpbGw9InVybCgjZ3QpIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWx0ZXI9InVybCgjZ2xvdykiPiQ8L3RleHQ+Cjwvc3ZnPg==">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIiB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzVBMTA1MCIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjNDgwQTUyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNzAlIiBzdG9wLWNvbG9yPSIjNEEwMDQwIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMkEwODM4Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJiaWxsZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM0QTBBNDIiLz48c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iIzZBMTI1OCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzRBMEE0MiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ2IiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjRUNDODdFIi8+PHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiNENEE4NTMiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNBODc5M0EiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9Imd0IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGOEUwOTAiLz48c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI0Q0QTg1MyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0E4NzkzQSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxmaWx0ZXIgaWQ9Imdsb3ciIHg9Ii0yMCUiIHk9Ii0yMCUiIHdpZHRoPSIxNDAlIiBoZWlnaHQ9IjE0MCUiPgogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIyIiByZXN1bHQ9ImJsdXIiLz4KICAgICAgPGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJibHVyIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPgogICAgPC9maWx0ZXI+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iMzgiIGZpbGw9InVybCgjYmcpIi8+CiAgPHJlY3QgeD0iMTQiIHk9IjQ2IiB3aWR0aD0iMTUyIiBoZWlnaHQ9Ijg4IiByeD0iMTAiIGZpbGw9InVybCgjYmlsbGcpIi8+CiAgPHJlY3QgeD0iMTQiIHk9IjQ2IiB3aWR0aD0iMTUyIiBoZWlnaHQ9Ijg4IiByeD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCNnYikiIHN0cm9rZS13aWR0aD0iMiIgb3BhY2l0eT0iMC44NSIvPgogIDxyZWN0IHg9IjIxIiB5PSI1MyIgd2lkdGg9IjEzOCIgaGVpZ2h0PSI3NCIgcng9IjciIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCNnYikiIHN0cm9rZS13aWR0aD0iMC44IiBvcGFjaXR5PSIwLjQ1Ii8+CiAgPHRleHQgeD0iOTAiIHk9IjExMiIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsIHNlcmlmIiBmb250LXNpemU9Ijc0IiBmb250LXdlaWdodD0iMTAwIgogICAgICAgIGZpbGw9InVybCgjZ3QpIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWx0ZXI9InVybCgjZ2xvdykiPiQ8L3RleHQ+Cjwvc3ZnPg==">
+<meta name="theme-color" content="#480A52">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Vidaloka&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold:          #D4A853;
+    --gold-light:    #ECC87E;
+    --gold-glow:     rgba(212,168,83,0.45);
+    --gold-dim:      #A8793A;
+    --grad-1: #3D0D5E;
+    --grad-2: #480A52;
+    --grad-3: #4A0040;
+    --grad-4: #2A0838;
+    --plum-rose:     #7A1060;
+    --dusty-mauve:   #DDB8D8;
+    --aubergine:     #2E0A30;
+    --on-dark-body:  #F0E8FF;
+    --on-dark-title: var(--gold-light);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--grad-4);
+    min-height: 100%;
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--on-dark-body);
+    overflow-x: hidden;
+  }
+
+  body {
+    background: linear-gradient(145deg,
+      #3D0D5E 0%,
+      #480A52 28%,
+      #4A0040 62%,
+      #2A0838 100%);
+    min-height: 100vh;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 45% at 50% 0%, rgba(90,20,110,0.35) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(74,0,64,0.3) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 95%, rgba(42,8,56,0.5) 0%, transparent 55%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .container {
+    max-width: 600px; margin: 0 auto;
+    padding: 0 18px 60px; position: relative; z-index: 1;
+  }
+
+  /* ── HEADER ── */
+  .header { text-align: center; margin-bottom: 6px; animation: fadeDown 0.9s ease both; padding-top: 14px; }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .brand-nav {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    margin-bottom: 0;
+    padding: 10px 0;
+    border-top: 1px solid rgba(212,168,83,0.28);
+    border-bottom: 1px solid rgba(212,168,83,0.28);
+  }
+  .brand-nav-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(11px, 2.4vw, 13px);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--dusty-mauve);
+  }
+  .brand-nav-star {
+    color: var(--gold-light); font-size: 12px;
+    text-shadow: 0 0 8px var(--gold-glow);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(34px, 8.5vw, 54px);
+    font-weight: 400;
+    color: var(--gold-light);
+    text-shadow: 0 0 50px var(--gold-glow), 0 2px 4px rgba(0,0,0,0.3);
+    letter-spacing: 1px;
+    margin-bottom: 0;
+    white-space: nowrap;
+  }
+
+  .header-divider {
+    width: 52%; height: 1px;
+    margin: 8px auto 12px;
+    background: linear-gradient(to right, transparent, rgba(212,168,83,0.7) 30%, rgba(212,168,83,0.7) 70%, transparent);
+  }
+
+  .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(16px, 4vw, 20px);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--on-dark-body);
+    line-height: 1.6;
+    margin-bottom: 4px;
+  }
+
+  .header-tagline {
+    font-size: 15px; font-style: italic;
+    color: var(--dusty-mauve); font-weight: 300;
+    margin-top: 8px; opacity: 0.85;
+  }
+
+  .tagline-star {
+    color: var(--gold-light); font-size: 9px;
+    opacity: 0.7; vertical-align: middle;
+    text-shadow: 0 0 6px var(--gold-glow);
+  }
+
+  /* ── FLOWER OF LIFE — two half-globes, left and right ── */
+  .bill-geo-left,
+  .bill-geo-right {
+    position: absolute;
+    top: 50%;
+    width: 68%;
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .bill-geo-left  { left: 0;  transform: translate(-50%, -50%); }
+  .bill-geo-right { right: 0; transform: translate(50%, -50%); }
+  .bill-geo-left svg,
+  .bill-geo-right svg { width: 100%; height: auto; display: block; }
+
+  /* ── BILL ANIMATIONS ── */
+  @keyframes borderGlow {
+    0%   { box-shadow: 0 0 0 2px rgba(212,168,83,0.12), 0 16px 30px rgba(0,0,0,0.85), inset 0 0 28px rgba(212,168,83,0.06); border-color: rgba(212,168,83,0.65); }
+    25%  { box-shadow: 0 0 0 3px rgba(212,168,83,0.3), 0 16px 30px rgba(0,0,0,0.85), inset 0 0 36px rgba(212,168,83,0.10); border-color: rgba(236,200,126,0.95); }
+    50%  { box-shadow: 0 0 0 2px rgba(212,168,83,0.12), 0 16px 30px rgba(0,0,0,0.85), inset 0 0 28px rgba(212,168,83,0.06); border-color: rgba(212,168,83,0.65); }
+    75%  { box-shadow: 0 0 0 3px rgba(212,168,83,0.22), 0 16px 30px rgba(0,0,0,0.85), inset 0 0 32px rgba(212,168,83,0.08); border-color: rgba(222,182,110,0.9); }
+    100% { box-shadow: 0 0 0 2px rgba(212,168,83,0.12), 0 16px 30px rgba(0,0,0,0.85), inset 0 0 28px rgba(212,168,83,0.06); border-color: rgba(212,168,83,0.65); }
+  }
+  @keyframes spendGlow {
+    0%   { box-shadow: 0 0 0 2px rgba(212,168,83,0.12), 0 16px 30px rgba(0,0,0,0.85), inset 0 0 28px rgba(212,168,83,0.06); border-color: rgba(212,168,83,0.65); }
+    20%  { box-shadow: 0 0 0 8px rgba(212,168,83,0.55), 0 16px 30px rgba(0,0,0,0.85), inset 0 0 60px rgba(212,168,83,0.18); border-color: rgba(240,210,140,1); }
+    50%  { box-shadow: 0 0 0 4px rgba(212,168,83,0.3), 0 16px 30px rgba(0,0,0,0.85), inset 0 0 40px rgba(212,168,83,0.12); border-color: rgba(230,195,130,0.95); }
+    100% { box-shadow: 0 0 0 2px rgba(212,168,83,0.12), 0 16px 30px rgba(0,0,0,0.85), inset 0 0 28px rgba(212,168,83,0.06); border-color: rgba(212,168,83,0.65); }
+  }
+  .bill.spending { animation: spendGlow 1.8s ease-out forwards !important; }
+
+  .bill-shimmer {
+    position: absolute; inset: 0; border-radius: 10px;
+    background: radial-gradient(ellipse 72% 62% at 50% 50%,
+      transparent 30%, rgba(15,0,22,0.14) 65%, rgba(15,0,22,0.32) 100%);
+    pointer-events: none; z-index: 3;
+  }
+
+  .bill-seal {
+    width: 32%; height: 1px; margin: 10px auto 0;
+    background: linear-gradient(to right,
+      transparent 0%,
+      rgba(236,200,126,0.5) 20%,
+      rgba(255,230,140,0.8) 50%,
+      rgba(236,200,126,0.5) 80%,
+      transparent 100%);
+  }
+
+  /* ── BILL ── */
+  .bill-wrapper { perspective: 1000px; margin-bottom: 4px; animation: fadeUp 1s ease 0.2s both; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .bill {
+    width: 88%; max-width: 420px; margin: 0 auto; aspect-ratio: 2.5 / 1;
+    background: linear-gradient(145deg, #4A0A42 0%, #5E1052 25%, #6A1258 50%, #5E1052 75%, #4A0A42 100%);
+    border-radius: 2px; border: 2px solid rgba(212,168,83,0.72);
+    box-shadow: 0 0 0 2px rgba(212,168,83,0.12), 0 16px 30px rgba(0,0,0,0.85), inset 0 0 28px rgba(212,168,83,0.06);
+    position: relative; overflow: hidden; cursor: pointer;
+    transition: transform 0.4s ease; display: block;
+    animation: borderGlow 3s ease-in-out infinite;
+  }
+  .bill:hover {
+    box-shadow: 0 0 0 5px rgba(212,168,83,0.28), 0 20px 40px rgba(0,0,0,0.9), inset 0 0 40px rgba(74,0,64,0.3);
+  }
+  .bill::before {
+    content: ''; position: absolute; inset: 7px;
+    border: 1px solid rgba(212,168,83,0.35); border-radius: 1px;
+    pointer-events: none; z-index: 1;
+  }
+  .bill::after {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg,  transparent, transparent 4px, rgba(255,255,255,0.018) 4px, rgba(255,255,255,0.018) 5px),
+      repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(255,255,255,0.013) 4px, rgba(255,255,255,0.013) 5px);
+    border-radius: 2px; pointer-events: none; z-index: 0;
+  }
+  .bill-content {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0; z-index: 2;
+    padding: 8px 0 4px;
+  }
+
+  .bill-amount-star {
+    font-size: clamp(9px, 1.8vw, 12px);
+    color: rgba(236,200,126,0.75);
+    text-shadow: 0 0 10px rgba(212,168,83,0.6);
+    align-self: center;
+    margin-left: 8px;
+    margin-bottom: 0.1em;
+  }
+
+  .bill-corner {
+    position: absolute;
+    font-size: 8px;
+    color: rgba(236,200,126,0.5);
+    text-shadow: 0 0 6px rgba(212,168,83,0.4);
+    z-index: 4;
+    line-height: 1;
+  }
+  .bill-corner-tl { top: 12px;  left: 14px;  }
+  .bill-corner-tr { top: 12px;  right: 14px; }
+  .bill-corner-bl { bottom: 12px; left: 14px;  }
+  .bill-corner-br { bottom: 12px; right: 14px; }
+
+  .bill-tagline-above {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(9px, 2.1vw, 13px);
+    letter-spacing: 3px;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    text-shadow: 0 0 14px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,1), 0 0 28px rgba(0,0,0,0.8);
+    margin-top: -22px;
+    margin-bottom: 4px;
+    padding: 0 18%;
+  }
+
+  .bill-denomination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    height: clamp(60px, 16vw, 104px);
+    margin-top: -6px;
+    transition: opacity 0.3s ease;
+  }
+  .bill-dollar {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(34px, 8.5vw, 54px);
+    color: var(--gold-light); font-weight: 400;
+    text-shadow: 0 0 20px rgba(212,168,83,0.6), 0 0 40px rgba(212,168,83,0.35);
+    align-self: center;
+    margin-bottom: 0.2em;
+    margin-right: 2px;
+    opacity: 0.95;
+  }
+  .bill-number {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(62px, 17vw, 108px);
+    color: var(--gold-light); font-weight: 600;
+    letter-spacing: -1px;
+    line-height: 1;
+    display: inline-block;
+    vertical-align: middle;
+    text-shadow:
+      0 0 20px rgba(236,200,126,0.95),
+      0 0 45px rgba(212,168,83,0.75),
+      0 0 80px rgba(212,168,83,0.45),
+      0 2px 4px rgba(0,0,0,0.5);
+  }
+
+  /* ── DAILY INTENTION ── */
+  .intention-section {
+    text-align: center; margin-bottom: 8px; margin-top: 32px;
+    animation: fadeUp 1s ease 0.28s both;
+    padding: 16px 0 8px;
+    border-top: 1px solid rgba(212,168,83,0.15);
+    border-bottom: 1px solid rgba(212,168,83,0.15);
+  }
+  .intention-label {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold-light); opacity: 1; margin-bottom: 14px;
+  }
+  .intention-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 5.5vw, 30px); font-style: italic; font-weight: 300;
+    color: #FFFFFF; line-height: 1.5;
+    padding: 0 16px;
+    text-shadow: 0 0 30px rgba(212,168,83,0.3), 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .intention-star {
+    color: var(--gold-light); font-size: 10px;
+    display: block; margin-top: 10px;
+    text-shadow: 0 0 8px var(--gold-glow);
+    opacity: 0.7;
+  }
+
+  /* ── PROMPT CARD ── */
+  .prompt-section { margin-bottom: 14px; animation: fadeUp 1s ease 0.45s both; }
+  .prompt-card {
+    background: linear-gradient(135deg, rgba(74,0,64,0.6) 0%, rgba(61,13,94,0.48) 100%);
+    border: 1px solid rgba(212,168,83,0.28); border-radius: 14px; padding: 22px 24px 18px;
+  }
+  .gold-diamond { color: var(--gold-light); }
+  .spend-label {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--dusty-mauve); margin-bottom: 12px;
+  }
+  .spend-row { display: flex; gap: 8px; align-items: stretch; }
+  .spend-input {
+    flex: 1; background: rgba(46,10,48,0.55); border: 1px solid rgba(212,168,83,0.26);
+    border-radius: 10px; padding: 12px 16px; font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; color: var(--on-dark-body); caret-color: var(--gold-light);
+    outline: none; resize: none; height: 90px; transition: border-color 0.25s, box-shadow 0.25s;
+    line-height: 1.4; vertical-align: top; display: block;
+  }
+  .spend-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,168,83,0.13); }
+  .spend-input::placeholder { color: rgba(221,184,216,0.65); font-style: italic; }
+  .spend-btn {
+    background: linear-gradient(160deg, #F0CC7A 0%, #D4A853 40%, #B8843A 100%);
+    border: 1px solid rgba(240,204,122,0.4);
+    border-radius: 12px; padding: 0 28px; height: 90px;
+    font-family: 'Playfair Display', serif; font-size: 19px; color: #2E0A30;
+    cursor: pointer; font-weight: 600; white-space: nowrap; flex-shrink: 0;
+    box-shadow: 0 4px 18px rgba(212,168,83,0.35), inset 0 1px 0 rgba(255,240,180,0.4);
+    transition: transform 0.18s, box-shadow 0.18s, filter 0.18s;
+    letter-spacing: 0.3px;
+    min-width: 130px;
+  }
+  .spend-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(212,168,83,0.55), inset 0 1px 0 rgba(255,240,180,0.4); filter: brightness(1.06); }
+  .spend-btn:active { transform: translateY(1px); box-shadow: 0 2px 10px rgba(212,168,83,0.3); }
+
+  /* ── AMOUNT ROW ── */
+  .amount-row-full {
+    margin-top: 16px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  .amount-field-label-full {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--dusty-mauve); opacity: 0.8;
+  }
+  .amount-pill-full {
+    display: flex; align-items: baseline;
+    background: rgba(46,10,48,0.6);
+    border: 1.5px solid rgba(212,168,83,0.55);
+    border-radius: 28px; padding: 12px 28px;
+    gap: 0; width: 100%;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 0 1px rgba(212,168,83,0.12), 0 4px 16px rgba(0,0,0,0.3);
+    cursor: text;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .amount-pill-full:focus-within {
+    border-color: rgba(212,168,83,0.85);
+    box-shadow: 0 0 0 3px rgba(212,168,83,0.15), 0 4px 16px rgba(0,0,0,0.3);
+  }
+  .amount-unit {
+    display: inline-flex;
+    align-items: center;
+  }
+  .amount-prefix-full {
+    font-family: 'Playfair Display', serif; font-size: 28px;
+    color: var(--gold-light); line-height: 1; margin-bottom: 0.1em;
+    margin-right: 0;
+    text-shadow: 0 0 16px var(--gold-glow);
+  }
+  .amount-input-full {
+    background: transparent; border: none; padding: 0;
+    font-size: 32px; color: var(--gold-light);
+    caret-color: var(--gold-light);
+    font-family: 'Playfair Display', serif;
+    width: 4ch; outline: none; text-align: center;
+    text-shadow: 0 0 16px var(--gold-glow);
+  }
+
+  /* ── INLINE COUNTER ── */
+  .counter-inline {
+    margin-top: 18px; text-align: center;
+    padding-top: 16px;
+    border-top: 1px solid rgba(212,168,83,0.12);
+  }
+  .counter-inline-label {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--dusty-mauve); display: block; margin-bottom: 4px;
+  }
+  .counter-inline-amount {
+    font-family: 'Playfair Display', serif; font-size: 36px;
+    color: var(--gold-light); text-shadow: 0 0 28px var(--gold-glow);
+    line-height: 1; display: flex; align-items: baseline; justify-content: center;
+  }
+  .counter-inline-amount .counter-dollar { font-size: 20px; margin-bottom: 0.1em; }
+
+  /* ── TALLY ── */
+  .tally-section {
+    margin-top: 14px;
+    background: linear-gradient(135deg, rgba(46,10,48,0.5) 0%, rgba(42,8,56,0.4) 100%);
+    border: 1px solid rgba(212,168,83,0.2);
+    border-radius: 14px;
+    padding: 18px 22px 14px;
+    animation: fadeUp 0.5s ease both;
+  }
+  .tally-label {
+    font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold-light); opacity: 0.7; margin-bottom: 14px; text-align: center;
+  }
+  .tally-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+  .tally-entry {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid rgba(212,168,83,0.1); padding-bottom: 10px;
+  }
+  .tally-entry:last-child { border-bottom: none; padding-bottom: 0; }
+  .tally-what {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; font-style: italic; font-weight: 300;
+    color: var(--on-dark-body); flex: 1; padding-right: 12px; line-height: 1.4;
+  }
+  .tally-what.empty { color: var(--dusty-mauve); opacity: 0.6; }
+  .tally-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px; color: var(--gold-light);
+    text-shadow: 0 0 12px var(--gold-glow);
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .tally-total-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-top: 10px;
+    border-top: 1px solid rgba(212,168,83,0.25);
+  }
+  .tally-total-label {
+    font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--dusty-mauve); opacity: 0.7;
+  }
+  .tally-total-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; color: var(--gold-light);
+    text-shadow: 0 0 20px var(--gold-glow);
+  }
+
+  /* ── PAGE ATTRIBUTION ── */
+  .page-attribution {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    text-align: center;
+    padding: 6px 16px 8px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 8px;
+    letter-spacing: 1px;
+    color: #C8A0C0;
+    opacity: 0.18;
+    font-style: italic;
+    pointer-events: none;
+  }
+
+  /* ── TADA OVERLAY ── */
+  .tada-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4vh;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+  }
+  .tada-overlay.show {
+    animation: overlayFade 4.2s ease forwards;
+  }
+  @keyframes overlayFade {
+    0%   { opacity: 0; }
+    16%  { opacity: 1; }
+    75%  { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  /* ── TADA BUBBLE ── */
+  .tada-bubble {
+    background: none;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+    transform: scale(0.55);
+    opacity: 0;
+    animation: none;
+  }
+  .tada-overlay.show .tada-bubble {
+    animation: bubleBloom 4.2s ease forwards;
+  }
+  @keyframes bubleBloom {
+    0%   { transform: scale(0.55); opacity: 0; }
+    22%  { transform: scale(1.06); opacity: 1; }
+    34%  { transform: scale(0.97); opacity: 1; }
+    46%  { transform: scale(1);    opacity: 1; }
+    100% { transform: scale(1);    opacity: 1; }
+  }
+  .tada-fol-svg {
+    display: block;
+    width: min(88vw, 320px);
+    height: auto;
+    filter: drop-shadow(0 0 28px rgba(212,168,83,0.7)) drop-shadow(0 0 60px rgba(122,16,96,0.5));
+  }
+  /* Slow FOL rotation — only active when overlay is showing */
+  .tada-overlay.show .fol-rotate {
+    animation: folSpin 55s linear infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  @keyframes folSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  /* Geo breathe pulse */
+  .tada-overlay.show .fol-geo {
+    animation: geoBreathe 2.8s ease-in-out 1s infinite;
+  }
+  @keyframes geoBreathe {
+    0%, 100% { opacity: 0.82; }
+    50%      { opacity: 1; }
+  }
+
+
+  /* ── GOLDEN DUST ── */
+  .coin-burst { position: fixed; pointer-events: none; z-index: 999; }
+  .dust {
+    position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, #F2D890 0%, #D4A853 45%, #A8793A 100%);
+    animation: dustFly var(--fly-dur) cubic-bezier(0.25,0.46,0.45,0.94) both;
+    box-shadow: 0 0 var(--glow) rgba(212,168,83,0.88);
+  }
+  @keyframes dustFly {
+    0%   { opacity: 1; transform: translate(0,0) scale(1); }
+    70%  { opacity: 0.6; }
+    100% { opacity: 0; transform: translate(var(--dx),var(--dy)) scale(0.1); }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+
+
+  <!-- Brand nav bar -->
+  <div class="brand-nav">
+    <span class="brand-nav-star">✦</span>
+    <span class="brand-nav-text">The Art of Divine Alignment</span>
+    <span class="brand-nav-star">✦</span>
+  </div>
+
+  <div class="header">
+    <h1>Vibrational Wallet</h1>
+    <div class="header-divider"></div>
+    <p class="header-tagline"><span class="tagline-star">✦</span> this money always replenishes <span class="tagline-star">✦</span></p>
+  </div>
+
+  <div class="bill-wrapper">
+    <div class="bill" id="bill">
+      <!-- Flower of Life — left half-globe -->
+      <div class="bill-geo-left">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+          <g fill="none" stroke="#ECC87E" stroke-width="0.85">
+            <circle cx="120" cy="120" r="28"/>
+            <circle cx="148" cy="120"   r="28"/><circle cx="134" cy="95.7"  r="28"/><circle cx="106" cy="95.7"  r="28"/>
+            <circle cx="92"  cy="120"   r="28"/><circle cx="106" cy="144.3" r="28"/><circle cx="134" cy="144.3" r="28"/>
+            <circle cx="176" cy="120"   r="28"/><circle cx="148" cy="71.6"  r="28"/><circle cx="92"  cy="71.6"  r="28"/>
+            <circle cx="64"  cy="120"   r="28"/><circle cx="92"  cy="168.4" r="28"/><circle cx="148" cy="168.4" r="28"/>
+            <circle cx="162" cy="95.7"  r="28"/><circle cx="120" cy="71.5"  r="28"/><circle cx="78"  cy="95.7"  r="28"/>
+            <circle cx="78"  cy="144.3" r="28"/><circle cx="120" cy="168.5" r="28"/><circle cx="162" cy="144.3" r="28"/>
+            <circle cx="120" cy="120"   r="84"/>
+          </g>
+        </svg>
+      </div>
+      <!-- Flower of Life — right half-globe -->
+      <div class="bill-geo-right">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+          <g fill="none" stroke="#ECC87E" stroke-width="0.85">
+            <circle cx="120" cy="120" r="28"/>
+            <circle cx="148" cy="120"   r="28"/><circle cx="134" cy="95.7"  r="28"/><circle cx="106" cy="95.7"  r="28"/>
+            <circle cx="92"  cy="120"   r="28"/><circle cx="106" cy="144.3" r="28"/><circle cx="134" cy="144.3" r="28"/>
+            <circle cx="176" cy="120"   r="28"/><circle cx="148" cy="71.6"  r="28"/><circle cx="92"  cy="71.6"  r="28"/>
+            <circle cx="64"  cy="120"   r="28"/><circle cx="92"  cy="168.4" r="28"/><circle cx="148" cy="168.4" r="28"/>
+            <circle cx="162" cy="95.7"  r="28"/><circle cx="120" cy="71.5"  r="28"/><circle cx="78"  cy="95.7"  r="28"/>
+            <circle cx="78"  cy="144.3" r="28"/><circle cx="120" cy="168.5" r="28"/><circle cx="162" cy="144.3" r="28"/>
+            <circle cx="120" cy="120"   r="84"/>
+          </g>
+        </svg>
+      </div>
+      <div class="bill-shimmer"></div>
+      <div class="bill-content">
+        <div class="bill-tagline-above">Divine Abundance</div>
+        <div class="bill-denomination" id="billAmount">
+          <span class="bill-dollar">$</span>
+          <span class="bill-number">111</span>
+          <span class="bill-amount-star">✦</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="intention-section">
+    <div class="intention-label">today's intention</div>
+    <div class="intention-text" id="intentionText"></div>
+    <span class="intention-star">✦</span>
+  </div>
+
+  <div class="prompt-section">
+    <div class="prompt-card">
+      <div class="spend-row">
+        <textarea class="spend-input" id="spendInput" placeholder="What would you love to spend this on?" rows="3"></textarea>
+        <button class="spend-btn" id="spendBtn">Spend it ✦</button>
+      </div>
+
+      <!-- Amount pill -->
+      <div class="amount-row-full">
+        <div class="amount-field-label-full">enter $ amount</div>
+        <div class="amount-pill-full">
+          <span class="amount-unit">
+            <span class="amount-prefix-full">$</span><input class="amount-input-full" id="amountInput" type="number" min="1" value="111" />
+          </span>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+  <!-- Tally -->
+  <div class="tally-section" id="tallySection" style="display:none;">
+    <div class="tally-label">called into being today</div>
+    <div class="tally-list" id="tallyList"></div>
+    <div class="tally-total-row">
+      <span class="tally-total-label">total</span>
+      <span class="tally-total-amount" id="tallyTotal">$0</span>
+    </div>
+  </div>
+
+  <div class="page-attribution">
+    Inspired by the Wallet Process in <em>Ask and It Is Given</em> by Jerry and Esther Hicks · © Abraham-Hicks Publications
+  </div>
+
+</div>
+
+<!-- TADA overlay -->
+<div class="tada-overlay" id="tadaOverlay">
+  <div class="tada-bubble" id="tadaBubble">
+    <svg class="tada-fol-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="folBg" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stop-color="#7A1060"/>
+          <stop offset="42%"  stop-color="#480A52"/>
+          <stop offset="78%"  stop-color="#3D0D5E"/>
+          <stop offset="100%" stop-color="#2A0838"/>
+        </radialGradient>
+        <radialGradient id="goldCentre" cx="50%" cy="50%" r="45%">
+          <stop offset="0%"   stop-color="#F8E090" stop-opacity="0.32"/>
+          <stop offset="60%"  stop-color="#D4A853" stop-opacity="0.1"/>
+          <stop offset="100%" stop-color="#D4A853" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="rimLight" cx="50%" cy="50%" r="50%">
+          <stop offset="70%"  stop-color="#7A1060" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#C8A0C0" stop-opacity="0.18"/>
+        </radialGradient>
+        <filter id="txtGlow" x="-50%" y="-80%" width="200%" height="280%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- Background fill -->
+      <circle cx="150" cy="150" r="148" fill="url(#folBg)"/>
+      <!-- Warm gold centre bloom -->
+      <circle cx="150" cy="150" r="148" fill="url(#goldCentre)"/>
+      <!-- Dusty mauve rim shimmer -->
+      <circle cx="150" cy="150" r="148" fill="url(#rimLight)"/>
+
+      <!-- Rotating FOL geo -->
+      <g class="fol-rotate">
+        <g class="fol-geo" fill="none" stroke="#D4A853" stroke-width="0.85">
+          <!-- Centre -->
+          <circle cx="150" cy="150" r="28"/>
+          <!-- Ring 1 -->
+          <circle cx="178" cy="150"   r="28"/>
+          <circle cx="164" cy="125.7" r="28"/>
+          <circle cx="136" cy="125.7" r="28"/>
+          <circle cx="122" cy="150"   r="28"/>
+          <circle cx="136" cy="174.3" r="28"/>
+          <circle cx="164" cy="174.3" r="28"/>
+          <!-- Ring 2a -->
+          <circle cx="206" cy="150"   r="28"/>
+          <circle cx="178" cy="101.6" r="28"/>
+          <circle cx="122" cy="101.6" r="28"/>
+          <circle cx="94"  cy="150"   r="28"/>
+          <circle cx="122" cy="198.4" r="28"/>
+          <circle cx="178" cy="198.4" r="28"/>
+          <!-- Ring 2b -->
+          <circle cx="192" cy="125.7" r="28"/>
+          <circle cx="150" cy="101.5" r="28"/>
+          <circle cx="108" cy="125.7" r="28"/>
+          <circle cx="108" cy="174.3" r="28"/>
+          <circle cx="150" cy="198.5" r="28"/>
+          <circle cx="192" cy="174.3" r="28"/>
+          <!-- Outer bounding circle -->
+          <circle cx="150" cy="150"   r="84"/>
+        </g>
+      </g>
+
+      <!-- Centre veil for text legibility -->
+      <circle cx="150" cy="150" r="50" fill="#3D0D5E" fill-opacity="0.82"/>
+      <circle cx="150" cy="150" r="50" fill="url(#goldCentre)"/>
+
+      <!-- IT'S YOURS! in Cinzel — golden and glowing -->
+      <text x="150" y="144"
+            font-family="Cinzel, serif"
+            font-size="14.5"
+            font-weight="600"
+            fill="#ECC87E"
+            text-anchor="middle"
+            letter-spacing="2.5"
+            filter="url(#txtGlow)">IT'S</text>
+      <text x="150" y="162"
+            font-family="Cinzel, serif"
+            font-size="14.5"
+            font-weight="600"
+            fill="#ECC87E"
+            text-anchor="middle"
+            letter-spacing="2.5"
+            filter="url(#txtGlow)">YOURS!</text>
+    </svg>
+  </div>
+</div>
+
+<script>
+  let currentDenom = 111;
+  let spendLog = [];
+  let totalSpent = 0;
+
+  function updateTally() {
+    const section = document.getElementById('tallySection');
+    const list = document.getElementById('tallyList');
+    const total = document.getElementById('tallyTotal');
+    section.style.display = 'block';
+    list.innerHTML = spendLog.map(e => `
+      <div class="tally-entry">
+        <span class="tally-what ${e.what ? '' : 'empty'}">${e.what || 'something wonderful'}</span>
+        <span class="tally-amount">$${e.amount.toLocaleString('en-US')}</span>
+      </div>`).join('');
+    total.textContent = '$' + totalSpent.toLocaleString('en-US');
+  }
+
+  // ── Daily intention ──
+  const INTENTIONS = [
+    "Money flows to me easily and joyfully.",
+    "I am a vibrational match to abundance.",
+    "The Universe delights in providing for me.",
+    "I receive with grace and appreciation.",
+    "Prosperity is my natural state of being.",
+    "Every dollar I spend returns multiplied.",
+    "I am open to infinite streams of income.",
+    "Abundance is always flowing to me.",
+    "I welcome financial freedom.",
+    "The more I appreciate, the more I receive.",
+    "Money is energy and I welcome its flow.",
+    "I am aligned with the frequency of wealth.",
+    "My desires are valid and always fulfilled.",
+    "I trust the Universe to provide for me.",
+    "Spending is giving energy permission to flow."
+  ];
+
+  function setDailyIntention() {
+    const dayNum = Math.floor(Date.now() / 86400000);
+    const phrase = INTENTIONS[dayNum % INTENTIONS.length];
+    const el = document.getElementById('intentionText');
+    if (el) el.textContent = phrase;
+  }
+
+  // ── Dynamic amount input width ──
+  function resizeAmountInput() {
+    const input = document.getElementById('amountInput');
+    input.style.width = Math.max(1, input.value.length) + 'ch';
+  }
+  document.getElementById('amountInput').addEventListener('input', resizeAmountInput);
+
+  // ── Denomination cycle on bill tap ──
+  const DENOMS = [11, 33, 55, 111, 333, 555];
+  const DENOM_LABELS = { 11:'11', 33:'33', 55:'55', 111:'111', 333:'333', 555:'555' };
+  let denomIndex = 3;
+
+  document.getElementById('bill').addEventListener('click', () => {
+    denomIndex = (denomIndex + 1) % DENOMS.length;
+    currentDenom = DENOMS[denomIndex];
+    const billAmt = document.getElementById('billAmount');
+    billAmt.style.opacity = '0';
+    setTimeout(() => {
+      billAmt.querySelector('.bill-number').textContent = DENOM_LABELS[currentDenom];
+      billAmt.style.opacity = '1';
+    }, 150);
+    document.getElementById('amountInput').value = currentDenom;
+    resizeAmountInput();
+    const bill = document.getElementById('bill');
+    bill.style.borderColor = 'rgba(236,200,126,0.95)';
+    setTimeout(() => { bill.style.borderColor = ''; }, 400);
+    if (navigator.vibrate) navigator.vibrate(30);
+  });
+
+  // ── Coin burst ──
+  function coinBurst(x, y) {
+    const b = document.createElement('div');
+    b.className = 'coin-burst';
+    b.style.cssText = `left:${x}px;top:${y}px`;
+    document.body.appendChild(b);
+    for (let i = 0; i < 90; i++) {
+      const c = document.createElement('div');
+      c.className = 'dust';
+      const isBig = i < 16, isMed = i < 36;
+      const size = isBig ? (16 + Math.random() * 18) : isMed ? (6 + Math.random() * 8) : (2 + Math.random() * 4);
+      const ang = Math.random() * 360, dist = isBig ? (150 + Math.random() * 220) : isMed ? (80 + Math.random() * 160) : (30 + Math.random() * 120);
+      const rad = ang * Math.PI / 180, dx = Math.cos(rad) * dist, dy = Math.sin(rad) * dist - Math.abs(Math.sin(rad) * dist * 0.3);
+      c.style.cssText = [
+        `width:${size.toFixed(1)}px`,
+        `height:${size.toFixed(1)}px`,
+        `--dx:${dx.toFixed(1)}px`,
+        `--dy:${dy.toFixed(1)}px`,
+        `--fly-dur:${(1 + Math.random() * 1.2).toFixed(2)}s`,
+        `--glow:${isBig ? '8px' : isMed ? '4px' : '2px'}`,
+        `animation-delay:${(Math.random() * 0.25).toFixed(2)}s`,
+        `opacity:${(0.75 + Math.random() * 0.25).toFixed(2)}`
+      ].join(';');
+      b.appendChild(c);
+    }
+    setTimeout(() => b.remove(), 2800);
+  }
+
+  // ── Spend button ──
+  document.getElementById('spendBtn').addEventListener('click', () => {
+    const input = document.getElementById('spendInput');
+    const amountInput = document.getElementById('amountInput');
+    const spentAmount = parseFloat(amountInput.value) || currentDenom;
+    const spentWhat = input.value.trim();
+
+    // Log to tally
+    spendLog.push({ what: spentWhat, amount: spentAmount });
+    totalSpent += spentAmount;
+    updateTally();
+
+    // Bill glow animation
+    const bill = document.getElementById('bill');
+    bill.classList.remove('spending');
+    void bill.offsetWidth; // reflow to restart animation
+    bill.classList.add('spending');
+    setTimeout(() => bill.classList.remove('spending'), 1900);
+
+    // TADA overlay — delayed until after explosion peaks
+    const overlay = document.getElementById('tadaOverlay');
+    overlay.classList.remove('show');
+    setTimeout(() => {
+      void overlay.offsetWidth;
+      overlay.classList.add('show');
+      setTimeout(() => overlay.classList.remove('show'), 3900);
+    }, 2200);
+
+    // Coin burst from bill
+    const billEl = document.getElementById('bill');
+    const rect = billEl.getBoundingClientRect();
+    coinBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+
+    // Haptic
+    if (navigator.vibrate) navigator.vibrate([30, 40, 60]);
+
+    // Clear input — no focus() so keyboard doesn't steal the TADA bubble
+    input.value = '';
+    if (document.activeElement) document.activeElement.blur();
+  });
+
+  // ── Bill tilt on hover ──
+  const bill = document.getElementById('bill');
+  bill.addEventListener('mousemove', e => {
+    const r = bill.getBoundingClientRect();
+    bill.style.transform = `rotateX(${((e.clientY - r.top - r.height / 2) / r.height) * -7}deg) rotateY(${((e.clientX - r.left - r.width / 2) / r.width) * 7}deg) scale(1.015)`;
+  });
+  bill.addEventListener('mouseleave', () => { bill.style.transform = ''; });
+
+  // ── Init ──
+  setDailyIntention();
+  resizeAmountInput();
+</script>
+
+</body>
+</html>
